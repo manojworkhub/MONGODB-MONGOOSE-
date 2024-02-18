@@ -1,0 +1,66 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {{#if edit_id}}
+      <h1>EDIT LIST</h1>
+
+      <form action="/editpage/{{edit_id}}" method="post">
+
+        <label for="">name</label>
+        <input type="text" name="name" value="{{edit_collection.name}}" />
+        <label for="">phone</label>
+        <input
+          type="tel"
+          maxlength="13"
+          pattern="^((\+91[0-9]{10})|(0[0-9]{10}))$"
+          name="phone"
+          placeholder="+91"
+         value="{{edit_collection.phone}}" 
+        />
+        <label for="">email</label>
+        <input type="text" name="email" value="{{edit_collection.email}}" />
+        <label for="">location</label>
+        <input type="text" name="location" value="{{edit_collection.location}}" />
+        <input type="submit" />
+
+      </form>
+    {{else}}
+      <h1>DATA LIST</h1>
+
+      <form action="/showpage" method="post">
+
+        <label for="">name</label>
+        <input type="text" name="name" />
+        <label for="">phone</label>
+        <input
+          type="tel"
+          maxlength="13"
+          pattern="^((\+91[0-9]{10})|(0[0-9]{10}))$"
+          name="phone"
+          placeholder="+91"
+        />
+        <label for="">email</label>
+        <input type="text" name="email" />
+        <label for="">location</label>
+        <input type="text" name="location" />
+        <input type="submit" />
+
+      </form>
+    {{/if}}
+    <ul>
+      {{#each data}}
+        <li>{{this.name}}-
+          {{this.phone}}-
+          {{this.email}}-
+          {{this.location}}
+          <a href="/?edit_id={{this._id}}">edit</a>
+          <a href="/?delete_id={{this._id}}">delete</a></li>
+
+      {{/each}}
+    </ul>
+  </body>
+</html>
